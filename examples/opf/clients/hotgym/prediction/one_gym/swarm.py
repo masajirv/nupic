@@ -33,9 +33,9 @@ logging.basicConfig()
 from nupic.swarming import permutations_runner
 from swarm_description import SWARM_DESCRIPTION
 
-INPUT_FILE = "rec-center-hourly.csv"
+INPUT_FILE = "taiyoukou.csv"
 DESCRIPTION = (
-  "This script runs a swarm on the input data (rec-center-hourly.csv) and\n"
+  "This script runs a swarm on the input data (taiyoukou.csv) and\n"
   "creates a model parameters file in the `model_params` directory containing\n"
   "the best model found by the swarm. Dumps a bunch of crud to stdout because\n"
   "that is just what swarming does at this point. You really don't need to\n"

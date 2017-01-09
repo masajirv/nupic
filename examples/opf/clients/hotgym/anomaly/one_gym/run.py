@@ -40,7 +40,7 @@ DESCRIPTION = (
   "are written to an output file (default) or plotted dynamically if\n"
   "the --plot option is specified.\n"
 )
-GYM_NAME = "rec-center-hourly"
+GYM_NAME = "rec-center-hourly-try"
 DATA_DIR = "."
 MODEL_PARAMS_DIR = "./model_params"
 # '7/2/10 0:00'

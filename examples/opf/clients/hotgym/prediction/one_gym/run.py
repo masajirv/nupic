@@ -44,30 +44,30 @@ DESCRIPTION = (
   "NOTE: You must run ./swarm.py before this, because model parameters\n"
   "are required to run NuPIC.\n"
 )
-GYM_NAME = "rec-center-hourly"  # or use "rec-center-every-15m-large"
+GYM_NAME = "taiyoukou"  # or use "rec-center-every-15m-large"
 DATA_DIR = "."
 MODEL_PARAMS_DIR = "./model_params"
 # '7/2/10 0:00'
 DATE_FORMAT = "%m/%d/%y %H:%M"
 
 _METRIC_SPECS = (
-    MetricSpec(field='kw_energy_consumption', metric='multiStep',
+    MetricSpec(field='V13', metric='multiStep',
                inferenceElement='multiStepBestPredictions',
                params={'errorMetric': 'aae', 'window': 1000, 'steps': 1}),
-    MetricSpec(field='kw_energy_consumption', metric='trivial',
+    MetricSpec(field='V13', metric='trivial',
                inferenceElement='prediction',
                params={'errorMetric': 'aae', 'window': 1000, 'steps': 1}),
-    MetricSpec(field='kw_energy_consumption', metric='multiStep',
+    MetricSpec(field='V13', metric='multiStep',
                inferenceElement='multiStepBestPredictions',
                params={'errorMetric': 'altMAPE', 'window': 1000, 'steps': 1}),
-    MetricSpec(field='kw_energy_consumption', metric='trivial',
+    MetricSpec(field='V13', metric='trivial',
                inferenceElement='prediction',
                params={'errorMetric': 'altMAPE', 'window': 1000, 'steps': 1}),
 )
 
 def createModel(modelParams):
   model = ModelFactory.create(modelParams)
-  model.enableInference({"predictedField": "kw_energy_consumption"})
+  model.enableInference({"predictedField": "V13"})
   return model
 
 
@@ -107,10 +107,27 @@ def runIoThroughNupic(inputData, model, gymName, plot):
   for row in csvReader:
     counter += 1
     timestamp = datetime.datetime.strptime(row[0], DATE_FORMAT)
-    consumption = float(row[1])
+    V13 = float(row[1])
+    V3  = float(row[2])
+    #V4  = float(row[3])
+    #V5  = float(row[4])
+    #V6  = float(row[5])
+    #V7  = float(row[5])
+    #V8  = float(row[6])
+    #V9  = float(row[7])
+    V10  = float(row[3])
     result = model.run({
       "timestamp": timestamp,
-      "kw_energy_consumption": consumption
+      "V13": V13,
+      "V3": V3,
+      #"V4": V4,
+      #"V5": V5,
+      #"V6": V6,
+      #"V7": V7,
+      #"V8": V8,
+      #"V9": V9,
+      "V10": V10,
+
     })
     result.metrics = metricsManager.update(result)
 
@@ -119,13 +136,13 @@ def runIoThroughNupic(inputData, model, gymName, plot):
       print ("After %i records, 1-step altMAPE=%f" % (counter,
               result.metrics["multiStepBestPredictions:multiStep:"
                              "errorMetric='altMAPE':steps=1:window=1000:"
-                             "field=kw_energy_consumption"]))
+                             "field=V13"]))
 
     if plot:
       result = shifter.shift(result)
 
     prediction = result.inferences["multiStepBestPredictions"][1]
-    output.write([timestamp], [consumption], [prediction])
+    output.write([timestamp], [V13], [prediction])
 
     if plot and counter % 20 == 0:
         output.refreshGUI()

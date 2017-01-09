@@ -26,19 +26,68 @@ SWARM_DESCRIPTION = {
       "fieldType": "datetime"
     },
     {
-      "fieldName": "kw_energy_consumption",
+      "fieldName": "V13",
       "fieldType": "float",
-      "maxValue": 53.0,
+      "maxValue": 640.932,
       "minValue": 0.0
-    }
+    },
+    {
+      "fieldName": "V3",
+      "fieldType": "float",
+      "maxValue": 1063.637,
+      "minValue": 0.0
+    },
+    #{
+      #"fieldName": "V4",
+      #"fieldType": "float",
+      #"maxValue": 721.165,
+      #"minValue": 0.0
+    #},
+    #{
+      #"fieldName": "V5",
+      #"fieldType": "float",
+      #"maxValue": 1011.806,
+      #"minValue": 0.0
+    #},
+    #{
+     # "fieldName": "V6",
+      #"fieldType": "float",
+      #"maxValue": 32.708,
+      #"minValue": 0.0
+    #},
+    #{
+      #"fieldName": "V7",
+      #"fieldType": "float",
+      #"maxValue": 3812.964,
+      #"minValue": 0.0
+    #},
+    #{
+     # "fieldName": "V8",
+      #"fieldType": "float",
+      #"maxValue": 7,
+      #"minValue": 0.0
+    #},
+    #{
+      #"fieldName": "V9",
+      #"fieldType": "float",
+      #"maxValue": 1096.297,
+      #"minValue": 0.0
+    #},
+    {
+      "fieldName": "V10",
+      "fieldType": "float",
+      "maxValue": 640,
+      "minValue": 0.0
+    },
+
   ],
   "streamDef": {
-    "info": "kw_energy_consumption",
+    "info": "taiyoukou-data",
     "version": 1,
     "streams": [
       {
-        "info": "Rec Center",
-        "source": "file://rec-center-hourly.csv",
+        "info": "taiyoukou",
+        "source": "file://taiyoukou.csv",
         "columns": [
           "*"
         ]
@@ -51,8 +100,8 @@ SWARM_DESCRIPTION = {
     "predictionSteps": [
       1
     ],
-    "predictedField": "kw_energy_consumption"
+    "predictedField": "V13"
   },
-  "iterationCount": -1,
-  "swarmSize": "medium"
+  "iterationCount": 9308,
+  "swarmSize": "large"
 }
